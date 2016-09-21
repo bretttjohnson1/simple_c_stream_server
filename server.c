@@ -15,15 +15,19 @@ void fail(char *err){
    exit(1);
 }
 int main(int argc, char **argv){
-   if(argc !=2){
+   if(argc>1){
+      if(strcmp(argv[1],"-h")==0){
+         printf("server usage\n./server <filename> <port>\n\nTo stream an mp3 file run the server as ./server file.mp3\nthen run the client as ./client <server_adress> | mpg123 -\n");
+         exit(0);
+      }
+   }
+   if(argc !=3){
       printf("missing args\nRun ./server -h for help\n");
       exit(1);
    }
    char *filename = argv[1];
-   if(strcmp(argv[1],"-h")==0){
-      printf("server usage\n./server <filename>\n\nTo stream an mp3 file run the server as ./server file.mp3\nthen run the client as ./client <server_adress> | mpg123 -\n");
-      exit(0);
-   }
+   char *port = argv[2];
+
    int status;
    struct addrinfo hints;
    struct addrinfo *serverinfo;
@@ -31,7 +35,7 @@ int main(int argc, char **argv){
    hints.ai_family = AF_UNSPEC;
    hints.ai_socktype = SOCK_STREAM;
    hints.ai_flags = AI_PASSIVE;
-   status = getaddrinfo(NULL, "8080", &hints,&serverinfo);
+   status = getaddrinfo(NULL, port, &hints,&serverinfo);
    if(status!=0){
       printf("err %s \n",strerror(errno));
       exit(1);
