@@ -17,7 +17,7 @@ void fail(char *err){
 int main(int argc, char **argv){
    if(argc>1){
       if(strcmp(argv[1],"-h")==0){
-         printf("server usage\n./server <filename> <port>\n\nTo stream an mp3 file run the server as ./server file.mp3\nthen run the client as ./client <server_adress> | mpg123 -\n");
+         printf("server usage\n./server <filename> <port>\n\nTo stream an mp3 file run the server as ./server file.mp3\nthen run the client as ./client <server_adress> <port> | mpg123 -\n");
          exit(0);
       }
    }
