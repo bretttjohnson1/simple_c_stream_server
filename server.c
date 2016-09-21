@@ -8,19 +8,22 @@
 #include <unistd.h>
 #include <errno.h>
 #include <arpa/inet.h>
+#include <string.h>
 
 void fail(char *err){
    printf("%s Error %s \n",err,strerror(errno));
    exit(1);
 }
 int main(int argc, char **argv){
-
-
    if(argc !=2){
-      perror("Usage ./server <filename>");
+      printf("missing args\nRun ./server -h for help\n");
       exit(1);
    }
    char *filename = argv[1];
+   if(strcmp(argv[1],"-h")==0){
+      printf("server usage\n./server <filename>\n\nTo stream an mp3 file run the server as ./server file.mp3\nthen run the client as ./client <server_adress> | mpg123 -\n");
+      exit(0);
+   }
    int status;
    struct addrinfo hints;
    struct addrinfo *serverinfo;

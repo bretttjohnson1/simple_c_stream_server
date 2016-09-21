@@ -16,7 +16,7 @@ void fail(){
 
 int main(int argc, char **argv){
    if(argc !=2){
-      perror("Usage ./client <server_address>");
+      printf("missing args\nRun ./client -h for help\n");
       exit(1);
    }
    char *address = argv[1];
@@ -24,6 +24,10 @@ int main(int argc, char **argv){
    char ip6[INET_ADDRSTRLEN];
    inet_ntop(AF_INET6,&(sa.sin6_addr),ip6, INET6_ADDRSTRLEN);
    printf("%s\n", ip6);*/
+   if(strcmp(argv[1],"-h")==0){
+      printf("client usage\n./client <server_adress>\n\nTo stream an mp3 file run the server as ./server file.mp3\nthen run the client as ./client <server_adress> | mpg123 -\n");
+      exit(0);
+   }
 
    int status;
    struct addrinfo hints;
