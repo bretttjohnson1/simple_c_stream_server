@@ -94,7 +94,7 @@ int main(int argc, char **argv){
       while(index<filelength){
          success = send(newfd, &filebuffer[index],1,0);
          if(success == -1){
-            printf("Transmission closed at %ld\n bytes",index );
+            printf("Transmission closed at %ld bytes\n",index );
             //fail("send data");
             break;
          }
